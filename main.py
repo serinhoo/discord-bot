@@ -6,8 +6,6 @@ import discord
 import pymongo
 from discord.ext import commands
 
-# Put your environmental variables into .env
-
 
 default_extensions = [
     "cogs.base",
