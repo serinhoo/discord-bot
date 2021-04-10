@@ -1,0 +1,14 @@
+*.pyc
+
+settings.py
+discord-bot.code-workspace
+
+tmp/*
+.vscode/*
+
+log/bot/*
+log/dm/*
+log/servers/*
+!log/bot/.gitkeep
+!log/dm/.gitkeep
+!log/servers/.gitkeep
