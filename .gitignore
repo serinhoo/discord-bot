@@ -4,6 +4,7 @@ settings.py
 discord-bot.code-workspace
 
 tmp/*
+!tmp/.gitkeep
 .vscode/*
 
 log/bot/*
