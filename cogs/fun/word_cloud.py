@@ -113,16 +113,11 @@ class WordplotCog(commands.Cog):
 
         messages = []
 
-        for tc in ctx.guild.text_channels:
-            # We use .map() to retrieve only the message.content property so
-            # we won't have to hold the whole message object in memory.
-            # We also .lower() all message contents so "Hi", "hi" and "hI" will be counted together
-            messages += (
-                await tc.history(limit=int(self.LIMIT / 3))
-                .filter(lambda m: m.channel.id == text_channel.id)
-                .map(lambda m: m.content.lower())
-                .flatten()
-            )
+        messages += (
+            await text_channel.history(limit=int(self.LIMIT / 3))
+            .map(lambda m: m.content.lower())
+            .flatten()
+        )
 
         # We join all strings together and then split them into a list of words.
         list_of_words = " ".join(messages).split(" ")
