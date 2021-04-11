@@ -65,7 +65,7 @@ class MyBot(commands.Bot):
 
 def get_command_prefix(bot, message):
     # Prefixy na które bot odpowiada
-    prefixes = ["*"]
+    prefixes = ["^", "*"]
     # if bot.guild_prefixes.has_key(message.guild.id):
     #     prefixes = bot.guild_prefixes()
     return commands.when_mentioned_or(*prefixes)(bot, message)
