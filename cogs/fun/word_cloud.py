@@ -86,7 +86,7 @@ class WordplotCog(commands.Cog):
         c = Counter(list_of_words)
 
         # We convert tuples in format (word, frequency) to dictionary
-        frequencies = {t[0]: t[1] for t in c.most_common(250)}
+        frequencies = {t[0]: t[1] for t in c.most_common(500) if len(t[0]) > 4}
 
         image = self.create_word_cloud(frequencies)
 
@@ -125,7 +125,7 @@ class WordplotCog(commands.Cog):
         c = Counter(list_of_words)
 
         # We convert tuples in format (word, frequency) to dictionary
-        frequencies = {t[0]: t[1] for t in c.most_common(250)}
+        frequencies = {t[0]: t[1] for t in c.most_common(500) if len(t[0]) > 4}
 
         image = self.create_word_cloud(frequencies)
 
@@ -172,7 +172,7 @@ class WordplotCog(commands.Cog):
         c = Counter(list_of_words)
 
         # We convert tuples in format (word, frequency) to dictionary
-        frequencies = {t[0]: t[1] for t in c.most_common(250)}
+        frequencies = {t[0]: t[1] for t in c.most_common(500) if len(t[0]) > 4}
 
         image = self.create_word_cloud(frequencies)
 
