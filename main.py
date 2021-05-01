@@ -6,7 +6,6 @@ import discord
 import pymongo
 from discord.ext import commands
 
-
 default_extensions = [
     "cogs.base",
     "cogs.management",
@@ -16,8 +15,6 @@ default_extensions = [
     "cogs.utilities.multiserver",
     "cogs.utilities.utility",
     "cogs.utilities.task",
-    "cogs.fun.entertainment",
-    "cogs.fun.voice_tts",
     "cogs.fun.word_cloud",
 ]
 
@@ -66,8 +63,6 @@ class MyBot(commands.Bot):
 def get_command_prefix(bot, message):
     # Prefixy na które bot odpowiada
     prefixes = ["^", "*"]
-    # if bot.guild_prefixes.has_key(message.guild.id):
-    #     prefixes = bot.guild_prefixes()
     return commands.when_mentioned_or(*prefixes)(bot, message)
 
 

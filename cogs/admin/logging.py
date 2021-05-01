@@ -10,7 +10,7 @@ from discord.ext import commands
 class LoggingCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.collection = self.bot.mongo.discord.messages
+        self.messages_collection = self.bot.mongo.discord.messages
 
     @commands.Cog.listener()
     async def on_message(self, message):
@@ -27,7 +27,7 @@ class LoggingCog(commands.Cog):
             query["message_channel_name"] = message.channel.name
         query["message_content"] = message.clean_content
 
-        self.collection.insert_one(query)
+        self.messages_collection.insert_one(query)
 
 
 def setup(bot):

@@ -6,11 +6,6 @@ from discord.ext import commands
 
 
 class MultiServerCog(commands.Cog):
-    """
-    Test docstring for a cog
-    `class MultiServerCog(commands.Cog)`
-    """
-
     def __init__(self, bot):
         self.bot = bot
         self.collection = self.bot.mongo.discord.multiserver
