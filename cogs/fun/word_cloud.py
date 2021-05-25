@@ -19,7 +19,7 @@ class WordcloudCog(commands.Cog):
 
         # We convert tuples in format (word, frequency) to dictionary {word: frequency}
         frequencies = {t[0]: t[1] for t in c.most_common(500) if len(t[0]) > 4}
-        
+
         wc = WordCloud(
             font_path="lib/bebasneue-wordcloud.ttf",
             background_color="white",

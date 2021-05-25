@@ -47,6 +47,7 @@ class MyBot(commands.Bot):
             )
         print("------------- FINISHED -------------")
 
+
 def get_command_prefix(bot, message):
     # Prefixy na które bot odpowiada
     prefixes = ["^", "*"]
