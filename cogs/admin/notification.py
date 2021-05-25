@@ -27,7 +27,7 @@ class NotificationCog(commands.Cog):
         # Send message to system messages channel if it is set, else send it to the topmost channel
         channel = (
             (member.guild.system_channel)
-            if (member.guild.system_channel != None)
+            if (member.guild.system_channel is not None)
             else (member.guild.text_channels[0])
         )
         await channel.send(embed=embed)
@@ -63,7 +63,7 @@ class NotificationCog(commands.Cog):
         # Send message to system messages channel if it is set, else send it to the topmost channel
         channel = (
             (member.guild.system_channel)
-            if (member.guild.system_channel != None)
+            if (member.guild.system_channel is not None)
             else (member.guild.text_channels[0])
         )
         await channel.send(embed=embed)

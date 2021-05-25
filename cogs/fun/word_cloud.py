@@ -6,12 +6,20 @@ from discord.ext import commands
 from wordcloud import WordCloud
 
 
-class WordplotCog(commands.Cog):
+class WordcloudCog(commands.Cog):
     def __init__(self, bot):
         self.LIMIT = 20000
         self.bot = bot
 
-    def create_word_cloud(self, frequencies: dict):
+    def create_word_cloud(self, messages: list):
+        # We join all strings together and then split them into a list of words.
+        list_of_words = " ".join(messages).split(" ")
+
+        c = Counter(list_of_words)
+
+        # We convert tuples in format (word, frequency) to dictionary {word: frequency}
+        frequencies = {t[0]: t[1] for t in c.most_common(500) if len(t[0]) > 4}
+        
         wc = WordCloud(
             font_path="lib/bebasneue-wordcloud.ttf",
             background_color="white",
@@ -65,10 +73,10 @@ class WordplotCog(commands.Cog):
             "This process will take some time. I will ping you when I'm done."
         )
 
-        messages = []
-
         # Hard limit is 50000 messages, so break it between all channels
         limit = int(self.LIMIT / len(ctx.guild.text_channels))
+
+        messages = []
 
         for channel in ctx.guild.text_channels:
             # We use .map() to retrieve only the message.content property so
@@ -80,15 +88,7 @@ class WordplotCog(commands.Cog):
                 .flatten()
             )
 
-        # We join all strings together and then split them into a list of words.
-        list_of_words = " ".join(messages).split(" ")
-
-        c = Counter(list_of_words)
-
-        # We convert tuples in format (word, frequency) to dictionary
-        frequencies = {t[0]: t[1] for t in c.most_common(500) if len(t[0]) > 4}
-
-        image = self.create_word_cloud(frequencies)
+        image = self.create_word_cloud(messages)
 
         await ctx.send(
             content="{}\nHere's a word cloud that you requested.".format(
@@ -111,23 +111,13 @@ class WordplotCog(commands.Cog):
             "This process will take some time. I will ping you when I'm done."
         )
 
-        messages = []
-
-        messages += (
+        messages = (
             await text_channel.history(limit=int(self.LIMIT / 3))
             .map(lambda m: m.content.lower())
             .flatten()
         )
 
-        # We join all strings together and then split them into a list of words.
-        list_of_words = " ".join(messages).split(" ")
-
-        c = Counter(list_of_words)
-
-        # We convert tuples in format (word, frequency) to dictionary
-        frequencies = {t[0]: t[1] for t in c.most_common(500) if len(t[0]) > 4}
-
-        image = self.create_word_cloud(frequencies)
+        image = self.create_word_cloud(messages)
 
         await ctx.send(
             content="{}\nHere's a word cloud of #{} that you requested.".format(
@@ -150,10 +140,10 @@ class WordplotCog(commands.Cog):
             "This process will take some time. I will ping you when I'm done."
         )
 
-        messages = []
-
         # Hard limit is 50000 messages, so break it between all channels
         limit = int(self.LIMIT / len(ctx.guild.text_channels))
+
+        messages = []
 
         for tc in ctx.guild.text_channels:
             # We use .map() to retrieve only the message.content property so
@@ -166,15 +156,7 @@ class WordplotCog(commands.Cog):
                 .flatten()
             )
 
-        # We join all strings together and then split them into a list of words.
-        list_of_words = " ".join(messages).split(" ")
-
-        c = Counter(list_of_words)
-
-        # We convert tuples in format (word, frequency) to dictionary
-        frequencies = {t[0]: t[1] for t in c.most_common(500) if len(t[0]) > 4}
-
-        image = self.create_word_cloud(frequencies)
+        image = self.create_word_cloud(messages)
 
         await ctx.send(
             content="{}\nHere's a word cloud of {}'s most used words.".format(
@@ -190,7 +172,7 @@ class WordplotCog(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(WordplotCog(bot))
+    bot.add_cog(WordcloudCog(bot))
     print(f"Uruchomiono moduł {__name__}")
 
 

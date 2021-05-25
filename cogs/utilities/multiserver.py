@@ -1,7 +1,6 @@
 import asyncio
 
 import discord
-from discord import guild
 from discord.ext import commands
 
 
